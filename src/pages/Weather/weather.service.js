@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
 
+// Returns array with Indices of the next five days in the list
+// From the API data (every day at 12:00 pm)
 const getDayIndices = data => {
   let dayIndices = [];
   dayIndices.push(0);
@@ -21,6 +23,7 @@ const getDayIndices = data => {
   return dayIndices;
 };
 
+// creates the day objects and updates the state
 const dataMapper = data => {
   const city = data.city.name;
   const days = [];
@@ -41,6 +44,7 @@ const dataMapper = data => {
   };
 };
 
+//Get Weather from API
 export const useGetWeather = ({ city }, config) => {
   return useQuery(
     ['weather', { city }],
@@ -64,4 +68,5 @@ export const useGetWeather = ({ city }, config) => {
   );
 };
 
+//Temperature Calculation
 export const calcTemp = temp => (temp ? Math.round(temp - 273.15) : 0);

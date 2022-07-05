@@ -18,6 +18,7 @@ export const WeatherCard = ({ day }) => {
       alignItems="center"
     >
       <Heading as="h1" marginTop="25px" fontSize="20px">
+        {/* dayjs is a library to format date */}
         {dayjs(day?.date).format('dddd')}
       </Heading>
       <Image src={`/assets/${day?.icon}.svg`} w="100px" h="100px" />

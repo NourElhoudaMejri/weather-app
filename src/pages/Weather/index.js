@@ -7,7 +7,6 @@ import {
   Flex,
   Image,
   Stack,
-  Progress,
   Spinner,
 } from '@chakra-ui/react';
 import { SearchInput } from '../../components';
@@ -18,11 +17,12 @@ import { useDebounce } from '../../utils/debounce';
 import { WeatherCard } from '../_partials/WeatherCard';
 
 const Weather = () => {
+  //Declare state
   const [city, setCity] = useState('');
   const debouncedCity = useDebounce(city, 500);
   const { data, isFetching } = useGetWeather({ city: debouncedCity });
   const { days, city: apiCity } = data || {};
-  console.log({ days });
+
   return (
     <Flex
       textAlign="center"
@@ -32,10 +32,10 @@ const Weather = () => {
       alignItems="center"
       bgImage="/sky.jpg"
     >
-      {/* <ColorModeSwitcher justifySelf="flex-end" /> */}
-      <VStack spacing={8} w="980px">
+      <VStack spacing={8} w="980px" mb="6%">
         <SearchInput onChange={event => setCity(event.target.value)} />
         <WeatherContainer>
+             {/* To render weather main information id data exist and isFetching false (user completed capturing the city) */}
           <WeatherBody alignSelf="center">
             {isFetching && <Spinner />}
             {!data && !isFetching && !debouncedCity && (
@@ -67,6 +67,7 @@ const Weather = () => {
               </HStack>
             )}
           </WeatherBody>
+          {/* To render weather box information id data exist and isFetching false (user completed capturing the city) */}
           {data && !isFetching && (
             <HStack
               spacing="8"
